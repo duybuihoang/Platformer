@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        isWalking = !(Mathf.Abs(rb.velocity.x) < 1e-3);
+        isWalking = (Mathf.Abs(rb.velocity.x) >= 1e-3);
     }
     private void CheckInput()
     {
@@ -284,6 +284,12 @@ public class PlayerController : MonoBehaviour
         PlayerAfterImagePool.Instance.GetFromPool();
         lastImageXPos = transform.position.x;
     }
+
+    public int GetFacingDirection()
+    {
+        return facingDirection;
+    }
+
     private void CheckDash()
     {
         if(isDashing)
@@ -390,6 +396,15 @@ public class PlayerController : MonoBehaviour
 
 
         }
+    }
+
+    public void disableFlip()
+    {
+        canFlip = false;
+    }
+    public void enableFlip()
+    {
+        canFlip = true;
     }
 
     private void Flip()
