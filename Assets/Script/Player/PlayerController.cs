@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     private float dashTimeLeft;
     private float lastImageXPos;
     private float lastDash = -100f;
+    private float knockbackStartTime;
+    [SerializeField]
+    private float knockbackDuration;
 
     private int amoutOfJumpsLeft;
     private int facingDirection = 1;
@@ -33,7 +36,10 @@ public class PlayerController : MonoBehaviour
     private bool canClimbLedge = false;
     private bool ledgeDetected;
     private bool isDashing;
+    private bool knockback;
 
+    [SerializeField]
+    private Vector2 knockbackSpeed;
 
     private Vector2 ledgePosBot;
     private Vector2 ledgePos1;
@@ -96,6 +102,7 @@ public class PlayerController : MonoBehaviour
         CheckJump();
         CheckLedgeClimb();
         CheckDash();
+        checkKnockback();
 
     }
 
@@ -113,7 +120,28 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("isWallSliding", isWallSliding);
     }
+    public bool getDashStatus()
+    {
+        return isDashing;
+    }
+
+    public void Knockback(int direction)
+    {
+        knockback = true;
+        knockbackStartTime = Time.time;
+        rb.velocity = new Vector2(knockbackSpeed.x * direction, knockbackSpeed.y);
+    }
     
+    private void checkKnockback()
+    {
+        if(Time.time >= knockbackStartTime + knockbackDuration && knockback)
+        {
+            knockback = false;
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+        }
+    }
+
+
     private void CheckIfWallSliding()
     {
         if (isTouchingWall && movementInputDirection == facingDirection && rb.velocity.y < 0 && !canClimbLedge)
@@ -409,7 +437,7 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        if (!isWallSliding && canFlip)
+        if (!isWallSliding && canFlip && !knockback)
         {
             facingDirection *= -1;
             isFacingRight = !isFacingRight;
@@ -421,11 +449,11 @@ public class PlayerController : MonoBehaviour
     private void ApplyMovement()
     {
 
-        if (!isGrounded && !isWallSliding && movementInputDirection == 0)
+        if (!isGrounded && !isWallSliding && movementInputDirection == 0 && !knockback)
         {           
             rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier, rb.velocity.y);
         }
-        else if(canMove)
+        else if(canMove && !knockback)
         {
             rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
         }
