@@ -98283,6 +98283,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1857955063586249741, guid: c32af2a4906b51041a204d1a54cfde25, type: 3}
   m_PrefabInstance: {fileID: 269854531150172492}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1301354443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1301354444}
+  m_Layer: 9
+  m_Name: PlayerCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1301354444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301354443}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.165, y: -0.492, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2021791493}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1330867389
 GameObject:
   m_ObjectHideFlags: 0
@@ -98409,8 +98440,10 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: b8f5f69140a1d044b8fa711837325e23, type: 2}
   wallCheck: {fileID: 1835437568}
   ledgeCheck: {fileID: 1117255061}
+  playerCheck: {fileID: 1301354444}
   idleStateData: {fileID: 11400000, guid: 8c7efcd6ed720894ea694b1f49160d3d, type: 2}
   moveStateData: {fileID: 11400000, guid: 42d59fcb183b9fc46aa44c1fb3931eab, type: 2}
+  playerDetectedData: {fileID: 11400000, guid: e70a1478e2357324dba9dba3cab6b140, type: 2}
 --- !u!1 &1835437567
 GameObject:
   m_ObjectHideFlags: 0
@@ -104588,6 +104621,7 @@ Transform:
   - {fileID: 1117255061}
   - {fileID: 1835437568}
   - {fileID: 1145763956}
+  - {fileID: 1301354444}
   m_Father: {fileID: 1521980350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2021791494
