@@ -9,7 +9,8 @@ public class PlayerCombatController : MonoBehaviour
     private bool combatEnabled;
     [SerializeField]
     private float inputTimer, attack1Radius, attack1Damage;
-
+    [SerializeField]
+    private float stunDamageAmount = 1f;
 
     [SerializeField]
     private Transform attack1HitBox;
@@ -20,7 +21,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private float lastInputTime = Mathf.NegativeInfinity;
 
-    private float[] attackDetail = new float[2];
+    private AttackDetails attackDetails ;
 
     private Animator anim;
 
@@ -81,13 +82,14 @@ public class PlayerCombatController : MonoBehaviour
 
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBox.position, attack1Radius, whatIsDamagable);
 
-        attackDetail[0] = attack1Damage;
-        attackDetail[1] = transform.position.x;
+        attackDetails.damageAmount = attack1Damage;
+        attackDetails.position = transform.position;
+        attackDetails.stunDamageAmount = stunDamageAmount;
 
         foreach(Collider2D collider in detectedObjects)
         {
 
-            collider.transform.parent.SendMessage("Damage", attackDetail);
+            collider.transform.parent.SendMessage("Damage", attackDetails);
             //Instantiate hit Particle
         }
     }
@@ -99,16 +101,16 @@ public class PlayerCombatController : MonoBehaviour
         anim.SetBool("attack1", false);
     }
 
-    private void Damage(float[] attackDetails)
+    private void Damage(AttackDetails attackDetails)
     {
         if (!PC.getDashStatus())
         {
             int direction;
 
             //Damage player here using attackDetails[0]
-            PS.DecreaseHealth(attackDetail[0]);
+            PS.DecreaseHealth(attackDetails.damageAmount);
 
-            if (attackDetails[1] < transform.position.x)
+            if (attackDetails.position.x < transform.position.x)
             {
                 direction = 1;
             }
