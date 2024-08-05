@@ -8,7 +8,7 @@ public class State
     protected Entity entity;
 
 
-    protected float startTime;
+    public float startTime { get; private set; }
 
     protected string animBoolName;
 

@@ -19,6 +19,8 @@ public class D_Entity : ScriptableObject
     public float stunResitance = 3f;
     public float stunRecoveryTime = 2f;
 
+    public GameObject HitParticle;
+
 
     public float closeRangeActionDistance = 1f;
 

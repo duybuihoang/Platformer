@@ -62,5 +62,6 @@ public class Enemy1 : Entity
         {
             stateMachine.ChangeState(stunState);
         }
+
     }
 }
