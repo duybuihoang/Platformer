@@ -9,6 +9,7 @@ public class PlayerDashState : PlayerAbilityState
     private bool dashInputStop;
 
     private float lastDashTime;
+    private float fixedDeltaTime;
 
     private Vector2 dashDirection;
     private Vector2 dashDirectionInput;
@@ -42,6 +43,22 @@ public class PlayerDashState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        /*
+        public static float timeScale;
+        Description
+        The scale at which time passes.
+
+        This can be used for slow motion effects or to speed up your application. When timeScale is 1.0, time passes as fast as real time. When timeScale is 0.5 time passes 2x slower than realtime.
+
+        When timeScale is set to zero your application acts as if paused if all your functions are frame rate independent. Negative values are ignored.
+
+        Note that changing the timeScale only takes effect on the following frames. How often MonoBehaviour.FixedUpdate is executed per frame depends on the timeScale. Therefore, to keep the number of FixedUpdate callbacks per frame constant, you must also multiply Time.fixedDeltaTime by timeScale. Whether this adjustment is desirable is game-specific.
+
+        FixedUpdate functions and suspended Coroutines with WaitForSeconds are not called when timeScale is set to zero.
+         
+         */
+
+        this.fixedDeltaTime = Time.fixedDeltaTime;
 
         canDash = false;
         player.InputHandler.UseDashInput();
@@ -51,6 +68,7 @@ public class PlayerDashState : PlayerAbilityState
 
         Time.timeScale = playerData.holdTimeScale;
         startTime = Time.unscaledTime;
+        Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
 
         player.DashDirectionIndicator.gameObject.SetActive(true);
 
@@ -91,6 +109,7 @@ public class PlayerDashState : PlayerAbilityState
                     isHolding = false;
                     Time.timeScale = 1f;
                     startTime = Time.time;
+                    Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
 
                     player.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
                     player.RB.drag = playerData.drag;
