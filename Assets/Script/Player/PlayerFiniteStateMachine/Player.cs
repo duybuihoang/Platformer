@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         CurrentVelocity = RB.velocity;
+        //Debug.Log(CurrentVelocity);
         StateMachine.currentState.LogicUpdate();
     }
 
