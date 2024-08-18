@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AggressiveWeapon : Weapon
@@ -34,10 +35,20 @@ public class AggressiveWeapon : Weapon
 
         WeaponAttackDetails details = aggressiveWeaponData.AttackDetails[attackCounter];
 
-        foreach (IDamageable item in detectedIDamageable)
-        { 
+        foreach (IDamageable item in detectedIDamageable.ToList())
+        {
             item.Damage(details.damageAmount);
         }
+
+        //using linq like this work the same
+
+ /*       List<IDamageable> temp = new List<IDamageable>(detectedIDamageable);
+
+        foreach (IDamageable item in temp)
+        {
+            item.Damage(details.damageAmount);
+        }*/
+
     }
 
     public void AddToDetect(Collider2D collision)
@@ -58,7 +69,7 @@ public class AggressiveWeapon : Weapon
 
         if (damageable != null)
         {
-            detectedIDamageable.Remove(damageable);
+             detectedIDamageable.Remove(damageable);
         }
     }
 

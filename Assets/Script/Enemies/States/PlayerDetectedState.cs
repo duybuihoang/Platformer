@@ -10,6 +10,7 @@ public class PlayerDetectedState : State
     protected bool isPlayerInMaxAgroRange;
     protected bool performLongRangeAction;
     protected bool performCloseRangeAction;
+    protected bool isDetectingLedge;
 
     public PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_PlayerDetected stateData) : base(entity, stateMachine, animBoolName)
     {
@@ -23,13 +24,14 @@ public class PlayerDetectedState : State
         isPlayerInMaxAgroRange = entity.checkPlayerInMaxAgroRange();
 
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
+        isDetectingLedge = core.CollisionSenses.LedgeVertical;
     }
 
     public override void Enter()
     {
         base.Enter();
         performLongRangeAction = false;
-        entity.SetVelocity(0);
+        core.Movement.SetVelocityX(0);
     }
 
     public override void Exit()

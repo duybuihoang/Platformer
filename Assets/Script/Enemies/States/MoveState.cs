@@ -7,7 +7,7 @@ public class MoveState : State
     protected D_MoveState stateData;
 
     protected bool isDetectingWall;
-    protected bool isDectectingLedge;
+    protected bool isDetectingLedge;
     protected bool isPLayerInMinAgroRange;
 
     public MoveState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData) : base(entity, stateMachine, animBoolName)
@@ -20,15 +20,15 @@ public class MoveState : State
     {
         base.DoChecks();
 
-        isDectectingLedge = entity.CheckLedge();
-        isDetectingWall = entity.CheckWall();
+        isDetectingLedge = core.CollisionSenses.LedgeVertical;
+        isDetectingWall = core.CollisionSenses.WallFront;
         isPLayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
     }
 
     public override void Enter()
     {
         base.Enter();
-        entity.SetVelocity(stateData.movementSpeed);
+        core.Movement.SetVelocityX(stateData.movementSpeed * core.Movement.FacingDirection);
 
   
 
