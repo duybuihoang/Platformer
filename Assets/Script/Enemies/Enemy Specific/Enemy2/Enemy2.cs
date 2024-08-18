@@ -55,10 +55,13 @@ public class Enemy2 : Entity
         dodgeState = new E2_DodgeState(this, stateMachine, "dodge", dodgeStateData, this);
         rangedAttackState = new E2_RangedAttackState(this, stateMachine, "rangedAttack", rangedAttackPosition, rangeAttackStateData, this); 
 
-        stateMachine.Initialize(moveState);
     }
 
-    public override void Damage(AttackDetails attackDetails)
+    private void Start()
+    {
+        stateMachine.Initialize(moveState);        
+    }
+   /* public override void Damage(AttackDetails attackDetails)
     {
         base.Damage(attackDetails);
 
@@ -79,7 +82,7 @@ public class Enemy2 : Entity
             lookForPlayerState.setTurnImmediately(true);
             stateMachine.ChangeState(lookForPlayerState);
         }
-    }
+    }*/
 
     public override void OnDrawGizmos()
     {

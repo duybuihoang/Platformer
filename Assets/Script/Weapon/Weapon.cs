@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     protected Animator weaponAnimator;
 
     protected PlayerAttackState state;
+    protected Core core;
 
     protected int attackCounter;
 
@@ -78,8 +79,10 @@ public class Weapon : MonoBehaviour
     public virtual void AnimationActionTrigger() { }
 
     #endregion
-    public void InitializeWeapon(PlayerAttackState state)
+    public void InitializeWeapon(PlayerAttackState state, Core core)
     {
         this.state = state;
+        this.core = core;
+         
     }
 }

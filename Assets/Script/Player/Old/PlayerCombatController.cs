@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerCombatController : MonoBehaviour
 {
-    [SerializeField]
+    /*[SerializeField]
     private bool combatEnabled;
     [SerializeField]
     private float inputTimer, attack1Radius, attack1Damage;
@@ -127,5 +127,5 @@ public class PlayerCombatController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(attack1HitBox.position, attack1Radius);
     }
-
+*/
 }

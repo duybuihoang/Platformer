@@ -6,7 +6,9 @@ using UnityEngine;
 public class AggressiveWeapon : Weapon
 {
     protected SO_AggressiveWeaponData aggressiveWeaponData;
-    private List<IDamageable> detectedIDamageable = new List<IDamageable>();
+
+    private List<IDamageable> detectedDamageables = new List<IDamageable>();
+    private List<IKnockbackable> detectedKnockbackables = new List<IKnockbackable>();
 
 
     protected override void Awake()
@@ -23,7 +25,6 @@ public class AggressiveWeapon : Weapon
         }
     }
 
-
     public override void AnimationActionTrigger()
     {
         base.AnimationActionTrigger();
@@ -35,9 +36,14 @@ public class AggressiveWeapon : Weapon
 
         WeaponAttackDetails details = aggressiveWeaponData.AttackDetails[attackCounter];
 
-        foreach (IDamageable item in detectedIDamageable.ToList())
+        foreach (IDamageable item in detectedDamageables.ToList())
         {
             item.Damage(details.damageAmount);
+        }
+
+        foreach (IKnockbackable item in detectedKnockbackables.ToList())
+        {
+            item.Knockback(details.knockbackAngle, details.knockbackStrength, core.Movement.FacingDirection); 
         }
 
         //using linq like this work the same
@@ -58,8 +64,16 @@ public class AggressiveWeapon : Weapon
 
         if(damageable != null)
         {
-            detectedIDamageable.Add(damageable);
+            detectedDamageables.Add(damageable);
         }
+
+        IKnockbackable knockbackable = collision.GetComponent<IKnockbackable>();
+
+        if(knockbackable != null)
+        {
+            detectedKnockbackables.Add(knockbackable);
+        }
+
     }
      
     public void RemoveFromDetected(Collider2D collision)
@@ -69,7 +83,15 @@ public class AggressiveWeapon : Weapon
 
         if (damageable != null)
         {
-             detectedIDamageable.Remove(damageable);
+             detectedDamageables.Remove(damageable);
+        }
+
+
+        IKnockbackable knockbackable = collision.GetComponent<IKnockbackable>();
+
+        if (knockbackable != null)
+        {
+            detectedKnockbackables.Remove(knockbackable);
         }
     }
 

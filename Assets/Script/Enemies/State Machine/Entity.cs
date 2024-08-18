@@ -49,6 +49,8 @@ public class Entity : MonoBehaviour
 
     public virtual void Update()
     {
+        Core.LogicUpdate();
+
         stateMachine.currentState.LogicUpdate();
 
         anim.SetFloat("yVelocity", Core.Movement.RB.velocity.y); 
@@ -83,39 +85,6 @@ public class Entity : MonoBehaviour
     {
         isStunned = false;
         currentStunResistance = entityData.stunResitance;
-    }
-
-    public virtual void Damage(AttackDetails attackDetails)
-    {
-        lastDamageTime = Time.time;
-
-        currentHealth -= attackDetails.damageAmount;
-        currentStunResistance -= attackDetails.stunDamageAmount;
-
-        if (currentHealth == 0)
-        {
-            isDead = true;
-        }
-
-        Instantiate(entityData.HitParticle, transform.position, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
-
-
-        DamageHop(entityData.damageHopSpeed);
-
-        if(attackDetails.position.x > transform.position.x)
-        {
-            lastDamageDirection = -1;
-        }
-        else
-        {
-            lastDamageDirection = 1;
-        }
-
-        if(currentStunResistance <= 0)
-        {
-            isStunned = true;
-        }
-    
     }
 
 
