@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Entity : MonoBehaviour
 {
+    protected Movement Movement { get => movement ?? Core.GetCoreComponent(ref movement); }
+
+
+    private Movement movement;
+
+
+
     public FiniteStateMachine stateMachine;
 
     public D_Entity entityData;
@@ -53,7 +61,7 @@ public class Entity : MonoBehaviour
 
         stateMachine.currentState.LogicUpdate();
 
-        anim.SetFloat("yVelocity", Core.Movement.RB.velocity.y); 
+        anim.SetFloat("yVelocity", Movement.RB.velocity.y); 
 
         if(Time.time >= lastDamageTime + entityData.stunRecoveryTime)
         {
@@ -77,8 +85,8 @@ public class Entity : MonoBehaviour
 
     public virtual void DamageHop(float velocity)
     {
-        velocityWorkSpace.Set(Core.Movement.RB.velocity.x, velocity);
-        Core.Movement.RB.velocity = velocityWorkSpace;
+        velocityWorkSpace.Set(Movement.RB.velocity.x, velocity);
+        Movement.RB.velocity = velocityWorkSpace;
     }
 
     public virtual void ResetStunnedResistance()
@@ -102,7 +110,7 @@ public class Entity : MonoBehaviour
     {
         if (Core != null)
         {
-            Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * Core.Movement.FacingDirection * entityData.wallCheckDistance));
+            Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * Movement.FacingDirection * entityData.wallCheckDistance));
             Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.right * entityData.ledgeCheckDistance));
             Gizmos.DrawLine(groundCheck.position, groundCheck.position + (Vector3)(Vector2.down * entityData.groundCheckRadius));
 

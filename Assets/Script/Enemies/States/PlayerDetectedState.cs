@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerDetectedState : State
 {
+
+    protected Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
+    protected CollisionSenses CollisionSenses { get => collisionSenses ?? core.GetCoreComponent(ref collisionSenses); }
+
+
+    private Movement movement;
+    private CollisionSenses collisionSenses;
+
     protected D_PlayerDetected stateData;
 
     protected bool isPlayerInMinAgroRange;
@@ -24,14 +32,14 @@ public class PlayerDetectedState : State
         isPlayerInMaxAgroRange = entity.checkPlayerInMaxAgroRange();
 
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
-        isDetectingLedge = core.CollisionSenses.LedgeVertical;
+        isDetectingLedge = CollisionSenses.LedgeVertical;
     }
 
     public override void Enter()
     {
         base.Enter();
         performLongRangeAction = false;
-        core.Movement.SetVelocityX(0);
+        Movement?.SetVelocityX(0);
     }
 
     public override void Exit()
@@ -43,7 +51,7 @@ public class PlayerDetectedState : State
     {
         base.LogicUpdate();
 
-        core.Movement.SetVelocityX(0);
+        Movement?.SetVelocityX(0);
 
 
         if (Time.time >= startTime + stateData.longRangeActionTime)

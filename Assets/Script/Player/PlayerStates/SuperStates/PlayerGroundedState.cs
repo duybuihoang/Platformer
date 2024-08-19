@@ -6,10 +6,20 @@ using UnityEngine.EventSystems;
 public class PlayerGroundedState : PlayerState
 {
     protected int xInput;
-
-
+    protected int yInput;
 
     protected bool isTouchingCeiling;
+
+
+    protected Movement Movement { get => movement ?? core.GetCoreComponent(ref movement);}
+    private Movement movement;
+
+    //unity 2021.2 or later 
+    //get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>();
+    //if before, use this
+    private CollisionSenses CollisionSenses{get => collisionSenses ?? core.GetCoreComponent(ref collisionSenses);}
+    private CollisionSenses collisionSenses;
+
     private bool JumpInput;
     private bool grabInpput;
     private bool isGrounded;
@@ -17,7 +27,6 @@ public class PlayerGroundedState : PlayerState
     private bool isTouchingLedge;
     private bool dashInput;
 
-    protected int yInput;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -27,10 +36,13 @@ public class PlayerGroundedState : PlayerState
     {
         base.DoChecks();
 
-        isGrounded = core.CollisionSenses.Ground;
-        isTouchingWall = core.CollisionSenses.WallFront;
-        isTouchingLedge = core.CollisionSenses.LedgeHorizontal;
-        isTouchingCeiling = core.CollisionSenses.Ceiling;
+        if (CollisionSenses)
+        {
+            isGrounded = CollisionSenses.Ground;
+            isTouchingWall = CollisionSenses.WallFront;
+            isTouchingLedge = CollisionSenses.LedgeHorizontal;
+            isTouchingCeiling = CollisionSenses.Ceiling;
+        }
     }
 
     public override void Enter()

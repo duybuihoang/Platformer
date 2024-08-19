@@ -28,9 +28,9 @@ public class PlayerMoveState : PlayerGroundedState
         base.LogicUpdate();
 
 
-        core.Movement.CheckIfShouldFlip(xInput); 
+        Movement?.CheckIfShouldFlip(xInput); 
 
-        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        Movement?.SetVelocityX(playerData.movementVelocity * xInput);
 
         if (!isExistingState)
         {
@@ -50,5 +50,4 @@ public class PlayerMoveState : PlayerGroundedState
         base.PhysicsUpdate();
     }
 }
-//TODO : FIX ARCHER ANIMATION
 //TODO : ADD ENEMY1 DEAD ANIMATION

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MeleeAttackState : AttackState
 {
+
+    protected Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
+    private Movement movement;
+
     protected D_MeleeAttack stateData;
 
 
@@ -64,7 +68,7 @@ public class MeleeAttackState : AttackState
             
             if(knockbackable != null)
             {
-                knockbackable.Knockback(stateData.knockbackAngle, stateData.knockbackStrength, core.Movement.FacingDirection);
+                knockbackable.Knockback(stateData.knockbackAngle, stateData.knockbackStrength, Movement.FacingDirection);
             }
 
         }

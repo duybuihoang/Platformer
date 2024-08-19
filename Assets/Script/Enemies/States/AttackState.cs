@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AttackState : State
 {
+    private Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
+    private Movement movement;
+
     protected Transform attackPosition;
 
     protected bool isAnimationFinish;
@@ -26,7 +29,7 @@ public class AttackState : State
 
         entity.atsm.attackState = this;
         isAnimationFinish = false;
-        core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
         
     }
 
@@ -38,7 +41,7 @@ public class AttackState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        core.Movement.SetVelocityX(0f);
+        Movement?.SetVelocityX(0f);
 
     }
 
