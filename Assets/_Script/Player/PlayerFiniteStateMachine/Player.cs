@@ -1,3 +1,4 @@
+using DuyBui.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,14 +41,23 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region Other Variable    
+    #region Other Variable   
+    
     private Vector2 workspace;
+
+    private Weapon PrimaryWeapon;
+    private Weapon SecondaryWeapon;
+
     #endregion
 
     #region Unity Callback Functions
     private void Awake()
     {
         Core = GetComponentInChildren<Core>();
+
+        PrimaryWeapon = transform.Find("PrimaryWeapon").GetComponent<Weapon>();
+        SecondaryWeapon = transform.Find("SecondaryWeapon").GetComponent<Weapon>();
+
 
         StateMachine = new PlayerStateMachine();
 
@@ -64,8 +74,8 @@ public class Player : MonoBehaviour
         DashState = new PlayerDashState(this, StateMachine, playerData, "inAir");
         CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, playerData, "crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, playerData, "crouchMove");
-        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
-        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", PrimaryWeapon);
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", SecondaryWeapon);
 
     }
 
