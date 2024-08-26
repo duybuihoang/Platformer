@@ -99666,6 +99666,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrimaryWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 7552001843496253212, guid: f08a190a7cf047741aa1b4aae623931e, type: 3}
+      propertyPath: numberOfAttacks
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552001843496253212, guid: f08a190a7cf047741aa1b4aae623931e, type: 3}
+      propertyPath: attackCounterResetCooldown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7589336900872177793, guid: f08a190a7cf047741aa1b4aae623931e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
