@@ -20,10 +20,14 @@ namespace DuyBui.Weapons
             } 
         }
 
+
+        public event Action onEnter;
         public event Action onExit;
 
+
         private Animator anim;
-        private GameObject baseGameObject;
+        public GameObject BaseGameObject { get; private set; }
+        public GameObject WeaponSpriteGameObject { get; private set; }
 
         private AnimationEventHandler eventHandler;
 
@@ -40,6 +44,8 @@ namespace DuyBui.Weapons
 
             anim.SetBool("active", true);
             anim.SetInteger("counter", CurrentAttackCounter);
+
+            onEnter?.Invoke();
         }
 
         private void Exit()
@@ -52,10 +58,11 @@ namespace DuyBui.Weapons
 
         private void Awake()
         {
-            baseGameObject = transform.Find("Base").gameObject;
-            anim = baseGameObject.GetComponent<Animator>();
+            BaseGameObject = transform.Find("Base").gameObject;
+            WeaponSpriteGameObject = transform.Find("WeaponSprite").gameObject;
+            anim = BaseGameObject.GetComponent<Animator>();
 
-            eventHandler = baseGameObject.GetComponent<AnimationEventHandler>();
+            eventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
 
             attackCounterResetTimer = new Timer(attackCounterResetCooldown);
         }
