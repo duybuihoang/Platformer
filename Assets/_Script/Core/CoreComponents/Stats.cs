@@ -3,37 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stats : CoreComponent
+namespace DuyBui.CoreSystem
 {
-    public event Action OnHealthZero;
-
-
-    [SerializeField] private float maxHealth;
-    private float currentHealth;
-
-    protected override void Awake()
+    public class Stats : CoreComponent
     {
-        base.Awake();
+        public event Action OnHealthZero;
 
-        currentHealth = maxHealth;
-    }
 
-    public void DecreaseHealth(float amount)
-    {
-        currentHealth -= amount;
-        if(currentHealth <= 0)
+        [SerializeField] private float maxHealth;
+        private float currentHealth;
+
+        protected override void Awake()
         {
-            currentHealth = 0;
-            OnHealthZero?.Invoke();
-            Debug.Log("Health is zero!!");
+            base.Awake();
+
+            currentHealth = maxHealth;
         }
+
+        public void DecreaseHealth(float amount)
+        {
+            currentHealth -= amount;
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                OnHealthZero?.Invoke();
+                Debug.Log("Health is zero!!");
+            }
+        }
+
+        public void IncreaseHealth(float amount)
+        {
+            currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        }
+
+
+
     }
-
-    public void IncreaseHealth(float amount)
-    {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-    }
-
-
-
 }

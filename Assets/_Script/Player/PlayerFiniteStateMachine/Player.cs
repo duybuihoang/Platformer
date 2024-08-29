@@ -1,3 +1,4 @@
+using DuyBui.CoreSystem;
 using DuyBui.Weapons;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,6 +59,8 @@ public class Player : MonoBehaviour
         PrimaryWeapon = transform.Find("PrimaryWeapon").GetComponent<Weapon>();
         SecondaryWeapon = transform.Find("SecondaryWeapon").GetComponent<Weapon>();
 
+        PrimaryWeapon.SetCore(Core);
+        SecondaryWeapon.SetCore(Core);
 
         StateMachine = new PlayerStateMachine();
 

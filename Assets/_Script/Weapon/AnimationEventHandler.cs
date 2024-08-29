@@ -7,8 +7,14 @@ namespace DuyBui.Weapons
 {
     public class AnimationEventHandler : MonoBehaviour
     {
-        public event Action onFinish;
+        public event Action OnFinish;
+        public event Action OnStartMovement;
+        public event Action OnStopMovement;
 
-        private void AnimationFinishTrigger() => onFinish?.Invoke();
+        private void AnimationFinishTrigger() => OnFinish?.Invoke();
+        private void StartMovementTrigger() => OnStartMovement?.Invoke();
+        private void StopMovementTrigger() => OnStopMovement?.Invoke();
+
+
     }
 }

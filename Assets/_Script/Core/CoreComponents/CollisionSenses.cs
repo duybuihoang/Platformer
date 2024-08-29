@@ -4,82 +4,87 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CollisionSenses : CoreComponent
+namespace DuyBui.CoreSystem
 {
-    protected Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
-
-    private Movement movement;
-
-
-    #region Check Transforms
-
-    public Transform GroundCheck {
-        get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent.name);
-        private set => groundCheck = value; 
-    }
-    public Transform WallCheck
+    public class CollisionSenses : CoreComponent
     {
-        get => GenericNotImplementedError<Transform>.TryGet(wallCheck, core.transform.parent.name);
-        private set => wallCheck = value; 
-    }
-    public Transform LedgeCheckHorizontal
-    {
-        get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckHorizontal, core.transform.parent.name);
-        private set => ledgeCheckHorizontal = value; 
-    }
-    public Transform LedgeCheckVertical {
-        get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckVertical, core.transform.parent.name);
-        private set => ledgeCheckVertical = value; 
-    }
-    public Transform CeilingCheck
-    {
-        get => GenericNotImplementedError<Transform>.TryGet(ceilingCheck, core.transform.parent.name);
-        private set => ceilingCheck = value;
-    }
+        protected Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
 
-    public float GroundCheckRadius { get => groundCheckRadius; set => groundCheckRadius = value; }
-    public LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
-    public float WallCheckDistance { get => wallCheckDistance; set => wallCheckDistance = value; }
+        private Movement movement;
 
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private Transform ledgeCheckHorizontal;
-    [SerializeField] private Transform ledgeCheckVertical;
 
-    [SerializeField] private Transform ceilingCheck;
+        #region Check Transforms
 
-    #endregion
+        public Transform GroundCheck
+        {
+            get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent.name);
+            private set => groundCheck = value;
+        }
+        public Transform WallCheck
+        {
+            get => GenericNotImplementedError<Transform>.TryGet(wallCheck, core.transform.parent.name);
+            private set => wallCheck = value;
+        }
+        public Transform LedgeCheckHorizontal
+        {
+            get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckHorizontal, core.transform.parent.name);
+            private set => ledgeCheckHorizontal = value;
+        }
+        public Transform LedgeCheckVertical
+        {
+            get => GenericNotImplementedError<Transform>.TryGet(ledgeCheckVertical, core.transform.parent.name);
+            private set => ledgeCheckVertical = value;
+        }
+        public Transform CeilingCheck
+        {
+            get => GenericNotImplementedError<Transform>.TryGet(ceilingCheck, core.transform.parent.name);
+            private set => ceilingCheck = value;
+        }
 
-    [SerializeField] private float groundCheckRadius;
-    [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private float wallCheckDistance;
+        public float GroundCheckRadius { get => groundCheckRadius; set => groundCheckRadius = value; }
+        public LayerMask WhatIsGround { get => whatIsGround; set => whatIsGround = value; }
+        public float WallCheckDistance { get => wallCheckDistance; set => wallCheckDistance = value; }
 
-    public bool Ceiling
-    {
-        get => Physics2D.OverlapCircle(CeilingCheck.position, groundCheckRadius, whatIsGround);
+        [SerializeField] private Transform groundCheck;
+        [SerializeField] private Transform wallCheck;
+        [SerializeField] private Transform ledgeCheckHorizontal;
+        [SerializeField] private Transform ledgeCheckVertical;
+
+        [SerializeField] private Transform ceilingCheck;
+
+        #endregion
+
+        [SerializeField] private float groundCheckRadius;
+        [SerializeField] private LayerMask whatIsGround;
+        [SerializeField] private float wallCheckDistance;
+
+        public bool Ceiling
+        {
+            get => Physics2D.OverlapCircle(CeilingCheck.position, groundCheckRadius, whatIsGround);
+        }
+
+        public bool Ground
+        {
+            get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsGround);
+        }
+
+        public bool WallFront
+        {
+            get => Physics2D.Raycast(WallCheck.position, Vector2.right * Movement.FacingDirection, wallCheckDistance, whatIsGround);
+        }
+
+        public bool WallBack
+        {
+            get => Physics2D.Raycast(WallCheck.position, Vector2.right * -Movement.FacingDirection, wallCheckDistance, whatIsGround);
+        }
+        public bool LedgeHorizontal
+        {
+            get => Physics2D.Raycast(LedgeCheckHorizontal.position, Vector2.right * Movement.FacingDirection, wallCheckDistance, whatIsGround);
+        }
+        public bool LedgeVertical
+        {
+            get => Physics2D.Raycast(LedgeCheckVertical.position, Vector2.down, wallCheckDistance, whatIsGround);
+        }
+
     }
-
-    public bool Ground
-    {
-        get => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsGround);
-    }
-
-    public bool WallFront
-    {
-        get => Physics2D.Raycast(WallCheck.position, Vector2.right * Movement.FacingDirection, wallCheckDistance, whatIsGround);
-    }
-
-    public bool WallBack
-    {
-        get => Physics2D.Raycast(WallCheck.position, Vector2.right * -Movement.FacingDirection, wallCheckDistance, whatIsGround);
-    }
-    public bool LedgeHorizontal
-    {
-        get => Physics2D.Raycast(LedgeCheckHorizontal.position, Vector2.right * Movement.FacingDirection, wallCheckDistance, whatIsGround);
-    }
-    public bool LedgeVertical
-    {
-        get => Physics2D.Raycast(LedgeCheckVertical.position, Vector2.down , wallCheckDistance, whatIsGround);
-    }
-
 }

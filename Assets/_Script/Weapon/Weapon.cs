@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using DuyBui.Utilities;
+using DuyBui.CoreSystem;
 
 namespace DuyBui.Weapons
 {
@@ -29,7 +30,8 @@ namespace DuyBui.Weapons
         public GameObject BaseGameObject { get; private set; }
         public GameObject WeaponSpriteGameObject { get; private set; }
 
-        private AnimationEventHandler eventHandler;
+        public AnimationEventHandler EventHandler { get; private set; }
+        public Core Core { get; private set; }
 
         private int currentAttackCounter;
 
@@ -48,6 +50,11 @@ namespace DuyBui.Weapons
             onEnter?.Invoke();
         }
 
+        public void SetCore(Core core)
+        {
+            Core = core;
+        }
+
         private void Exit()
         {
             anim.SetBool("active", false);
@@ -62,7 +69,7 @@ namespace DuyBui.Weapons
             WeaponSpriteGameObject = transform.Find("WeaponSprite").gameObject;
             anim = BaseGameObject.GetComponent<Animator>();
 
-            eventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
+            EventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
 
             attackCounterResetTimer = new Timer(attackCounterResetCooldown);
         }
@@ -76,13 +83,13 @@ namespace DuyBui.Weapons
 
         private void OnEnable()
         {
-            eventHandler.onFinish += Exit;
+            EventHandler.OnFinish += Exit;
             attackCounterResetTimer.OnTimerDone += ResetAttackCounter;
         }
 
         private void OnDisable()
         {
-            eventHandler.onFinish -= Exit;
+            EventHandler.OnFinish -= Exit;
             attackCounterResetTimer.OnTimerDone -= ResetAttackCounter;
 
         }
