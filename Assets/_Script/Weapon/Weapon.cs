@@ -6,7 +6,7 @@ namespace DuyBui.Weapons
 {
     public class Weapon : MonoBehaviour
     {
-        [SerializeField] private int numberOfAttacks;
+        [field: SerializeField]public WeaponDataSO Data { get; private set; }
         [SerializeField] private float attackCounterResetCooldown;
 
         public int CurrentAttackCounter
@@ -16,7 +16,7 @@ namespace DuyBui.Weapons
             {
                 //currentAttackCounter = value % numberOfAttacks;
 
-                currentAttackCounter = value >= numberOfAttacks ? 0 : value;
+                currentAttackCounter = value >= Data.NumberOfAttacks ? 0 : value;
             } 
         }
 

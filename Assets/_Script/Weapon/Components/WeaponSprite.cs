@@ -10,9 +10,10 @@ namespace DuyBui.Weapons.Components
         private SpriteRenderer baseSpriteRenderer;
         private SpriteRenderer weaponSpriteRenderer;
 
-        [SerializeField] private WeaponSprites[] weaponSprites;
-
         private int currentWeaponSpriteIndex;
+
+        private WeaponSpriteData data;
+
 
         protected  override void HandleEnter() 
         {
@@ -30,7 +31,7 @@ namespace DuyBui.Weapons.Components
                 return;
             }
 
-            var currentAttackSprites = weaponSprites[weapon.CurrentAttackCounter].Sprites;
+            var currentAttackSprites = data.AttackData[weapon.CurrentAttackCounter].Sprites;
             if(currentWeaponSpriteIndex >= currentAttackSprites.Length)
             {
                 Debug.LogWarning($"{weapon.name} weapon sprite length mismatch");
@@ -50,6 +51,7 @@ namespace DuyBui.Weapons.Components
             baseSpriteRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
             weaponSpriteRenderer = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
 
+            data = weapon.Data.getData<WeaponSpriteData>();
 
             //TODO: FIX THIS WHEN CREATE WEAPON DATA
             /*baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();
@@ -73,10 +75,5 @@ namespace DuyBui.Weapons.Components
 
     }
 
-    [Serializable]
-    public class WeaponSprites
-    {
-        [field: SerializeField] public Sprite[] Sprites { get; private set; }
-
-    }
+    
 }
