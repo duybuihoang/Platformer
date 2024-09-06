@@ -23,7 +23,31 @@ MonoBehaviour:
     - rid: 1139503186864504834
       type: {class: ActionHitBoxData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
-        <AttackData>k__BackingField: []
+        <AttackData>k__BackingField:
+        - Debug: 1
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.11
+            y: -0.9
+            width: 1.94
+            height: 1.42
+        - Debug: 1
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.11
+            y: -0.9
+            width: 1.94
+            height: 1.42
+        - Debug: 1
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0
+            y: -1
+            width: 1.61
+            height: 2.51
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
     - rid: 6425438865561485315
       type: {class: WeaponSpriteData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
