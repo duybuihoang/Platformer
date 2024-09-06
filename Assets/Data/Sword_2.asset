@@ -16,9 +16,14 @@ MonoBehaviour:
   <ComponentData>k__BackingField:
   - rid: 6425438865561485315
   - rid: 6425438865561485318
+  - rid: 1139503186864504834
   references:
     version: 2
     RefIds:
+    - rid: 1139503186864504834
+      type: {class: ActionHitBoxData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField: []
     - rid: 6425438865561485315
       type: {class: WeaponSpriteData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:

@@ -5,14 +5,13 @@ using UnityEngine;
 
 namespace DuyBui.Weapons.Components
 {
-    public class WeaponSprite : WeaponComponent
+    public class WeaponSprite : WeaponComponent<WeaponSpriteData, AttackSprites>
     {
         private SpriteRenderer baseSpriteRenderer;
         private SpriteRenderer weaponSpriteRenderer;
 
         private int currentWeaponSpriteIndex;
 
-        private WeaponSpriteData data;
 
 
         protected  override void HandleEnter() 
@@ -31,7 +30,7 @@ namespace DuyBui.Weapons.Components
                 return;
             }
 
-            var currentAttackSprites = data.AttackData[weapon.CurrentAttackCounter].Sprites;
+            var currentAttackSprites = currentAttackData.Sprites;
             if(currentWeaponSpriteIndex >= currentAttackSprites.Length)
             {
                 Debug.LogWarning($"{weapon.name} weapon sprite length mismatch");
@@ -51,7 +50,6 @@ namespace DuyBui.Weapons.Components
             baseSpriteRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
             weaponSpriteRenderer = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
 
-            data = weapon.Data.getData<WeaponSpriteData>();
 
             //TODO: FIX THIS WHEN CREATE WEAPON DATA
             /*baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();

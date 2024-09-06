@@ -16,9 +16,35 @@ MonoBehaviour:
   <ComponentData>k__BackingField:
   - rid: 6425438865561485314
   - rid: 6425438865561485316
+  - rid: 1139503186864504833
   references:
     version: 2
     RefIds:
+    - rid: 1139503186864504833
+      type: {class: ActionHitBoxData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField:
+        - <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0
+            y: 0
+            width: 0
+            height: 0
+        - <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0
+            y: 0
+            width: 0
+            height: 0
+        - <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0
+            y: 0
+            width: 0
+            height: 0
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 0
     - rid: 6425438865561485314
       type: {class: WeaponSpriteData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:

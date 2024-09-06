@@ -6,9 +6,10 @@ using UnityEngine;
 namespace DuyBui.Weapons.Components
 {
     [Serializable]
-    public class AttackSprites : AttackData
+    public class AttackActionHitBox :AttackData
     {
-        [field: SerializeField] public Sprite[] Sprites { get; private set; }
+        public bool Debug;
+        [field: SerializeField] public Rect HitBox { get; private set; }
 
     }
 }
