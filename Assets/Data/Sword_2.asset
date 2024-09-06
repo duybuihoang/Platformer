@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8139464d014c8488d4a2e0e55d13f3, type: 3}
   m_Name: Sword_2
   m_EditorClassIdentifier: 
-  <NumberOfAttacks>k__BackingField: 3
+  <NumberOfAttacks>k__BackingField: 2
   <ComponentData>k__BackingField:
   - rid: 6425438865561485315
   - rid: 6425438865561485318
@@ -23,60 +23,54 @@ MonoBehaviour:
     - rid: 1139503186864504834
       type: {class: ActionHitBoxData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
-        <AttackData>k__BackingField:
-        - Debug: 1
+        name: ActionHitBoxData
+        attackData:
+        - name: Attack 1
+          Debug: 1
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0.11
             y: -0.9
             width: 1.94
             height: 1.42
-        - Debug: 1
+        - name: Attack 2
+          Debug: 1
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0.11
             y: -0.9
             width: 1.94
             height: 1.42
-        - Debug: 1
-          <HitBox>k__BackingField:
-            serializedVersion: 2
-            x: 0
-            y: -1
-            width: 1.61
-            height: 2.51
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 512
     - rid: 6425438865561485315
       type: {class: WeaponSpriteData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
-        <AttackData>k__BackingField:
-        - <Sprites>k__BackingField:
+        name: WeaponSpriteData
+        attackData:
+        - name: Attack 1
+          <Sprites>k__BackingField:
           - {fileID: 956696612, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: 1549677453, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: -19719317, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: 1932287414, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: -590185016, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
-        - <Sprites>k__BackingField:
+        - name: Attack 2
+          <Sprites>k__BackingField:
           - {fileID: -211247191, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: 132781419, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: 1636142005, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: 714473264, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
           - {fileID: -675260236, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
-        - <Sprites>k__BackingField:
-          - {fileID: -168452941, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
-          - {fileID: -1835771938, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
-          - {fileID: -825139206, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
-          - {fileID: -1098477794, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
-          - {fileID: 541751004, guid: 37197635aa0f71548a4eb26968864dd4, type: 3}
     - rid: 6425438865561485318
       type: {class: MovementData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
-        <AttackData>k__BackingField:
-        - <Direction>k__BackingField: {x: 1, y: 0}
+        name: MovementData
+        attackData:
+        - name: Attack 1
+          <Direction>k__BackingField: {x: 1, y: 0}
           <Velocity>k__BackingField: 3
-        - <Direction>k__BackingField: {x: 1, y: 0}
+        - name: Attack 2
+          <Direction>k__BackingField: {x: 1, y: 0}
           <Velocity>k__BackingField: 4
-        - <Direction>k__BackingField: {x: 1, y: 5}
-          <Velocity>k__BackingField: 5

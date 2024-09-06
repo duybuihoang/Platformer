@@ -23,7 +23,7 @@ MonoBehaviour:
     - rid: 1139503186864504833
       type: {class: ActionHitBoxData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
-        <AttackData>k__BackingField:
+        attackData:
         - Debug: 1
           <HitBox>k__BackingField:
             serializedVersion: 2
@@ -51,7 +51,7 @@ MonoBehaviour:
     - rid: 6425438865561485314
       type: {class: WeaponSpriteData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
-        <AttackData>k__BackingField:
+        attackData:
         - <Sprites>k__BackingField:
           - {fileID: -1786250690, guid: d53220e21123d6b47bdd73b47edde222, type: 3}
           - {fileID: 1058309293, guid: d53220e21123d6b47bdd73b47edde222, type: 3}
@@ -73,7 +73,7 @@ MonoBehaviour:
     - rid: 6425438865561485316
       type: {class: MovementData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
-        <AttackData>k__BackingField:
+        attackData:
         - <Direction>k__BackingField: {x: 1, y: 0}
           <Velocity>k__BackingField: 3
         - <Direction>k__BackingField: {x: 1, y: 0}
