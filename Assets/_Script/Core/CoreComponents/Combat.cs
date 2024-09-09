@@ -2,55 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DuyBui.CoreSystem
 {
-    public class Combat : CoreComponent, IDamageable, IKnockbackable
+    public class KnockBackReceiver : CoreComponent, IKnockBackable
     {
-        [SerializeField] private GameObject damageParticles;
 
-        protected Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
-        protected CollisionSenses CollisionSenses { get => collisionSenses ?? core.GetCoreComponent(ref collisionSenses); }
-        private Stats Stats { get => stats ?? core.GetCoreComponent(ref stats); }
-        private ParticleManager ParticleManager => particleManager ? particleManager : core.GetCoreComponent(ref particleManager);
 
-        private Movement movement;
-        private CollisionSenses collisionSenses;
-        private Stats stats;
-        private ParticleManager particleManager;
 
-        [SerializeField] private float maxKnockbackTime = 0.2f;
+        //[FormerlySerializedAs("maxKnockbackTime")][SerializeField] private float maxKnockBackTime = 0.2f;
+        [SerializeField] private float maxKnockBackTime = 0.2f;
 
-        private bool isKnockbackActive;
-        private float knockbackStartTimer;
+        private CoreComp<Movement> movement;
+        private CoreComp<CollisionSenses> collisionSenses;
+
+        private bool isKnockBackActive;
+        private float knockBackStartTimer;
 
         public override void LogicUpdate()
         {
-            CheckKnockback();
+            CheckKnockBack();
         }
-        public void Damage(float amount)
+        
+
+        public void KnockBack(Vector2 angle, float strength, int direction)
         {
-            Debug.Log(core.transform.parent.name + " Damaged!");
-            Stats?.DecreaseHealth(amount);
-            ParticleManager.StartParticleWithRandomRotation(damageParticles);
+            movement.Comp?.SetVelocity(strength, angle, direction);
+            movement.Comp.canSetVelocity = false;
+            isKnockBackActive = true;
+            knockBackStartTimer = Time.time;
         }
 
-        public void Knockback(Vector2 angle, float strength, int direction)
+        private void CheckKnockBack()
         {
-            Movement?.SetVelocity(strength, angle, direction);
-            Movement.canSetVelocity = false;
-            isKnockbackActive = true;
-            knockbackStartTimer = Time.time;
-        }
-
-        private void CheckKnockback()
-        {
-            if (isKnockbackActive && (Movement?.CurrentVelocity.y <= 0.01f && CollisionSenses.Ground
-                 || Time.time >= knockbackStartTimer + maxKnockbackTime))
+            if (isKnockBackActive && (movement.Comp?.CurrentVelocity.y <= 0.01f && collisionSenses.Comp.Ground
+                 || Time.time >= knockBackStartTimer + maxKnockBackTime))
             {
-                isKnockbackActive = false;
-                Movement.canSetVelocity = true;
+                isKnockBackActive = false;
+                movement.Comp.canSetVelocity = true;
             }
+        }
+        protected override void Awake()
+        {
+            base.Awake();
+
+            movement = new CoreComp<Movement>(core);
+            collisionSenses = new CoreComp<CollisionSenses>(core);
         }
     }
 }

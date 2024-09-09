@@ -8,7 +8,7 @@ namespace DuyBui.Weapons.Components
 {
     public class ActionHitBox : WeaponComponent<ActionHitBoxData, AttackActionHitBox>
     {
-        private event Action<Collider2D[]> OnDetectedCollider2D; 
+        public event Action<Collider2D[]> OnDetectedCollider2D; 
 
         private CoreComp<CoreSystem.Movement> movement;
 

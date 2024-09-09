@@ -17,6 +17,7 @@ MonoBehaviour:
   - rid: 6425438865561485315
   - rid: 6425438865561485318
   - rid: 1139503186864504834
+  - rid: 1144698469819088897
   references:
     version: 2
     RefIds:
@@ -44,6 +45,15 @@ MonoBehaviour:
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 512
+    - rid: 1144698469819088897
+      type: {class: DamageData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: DamageData
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 5
+        - name: Attack 2
+          <Amount>k__BackingField: 10
     - rid: 6425438865561485315
       type: {class: WeaponSpriteData, ns: DuyBui.Weapons.Components, asm: Assembly-CSharp}
       data:
