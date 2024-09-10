@@ -20,7 +20,9 @@ namespace DuyBui.Weapons.Components
         {
             base.Start();
 
-            movement = new CoreComp<CoreSystem.Movement>(Core);
+            movement = new CoreComp<CoreSystem.Movement>(Core);       
+            evenHandler.OnAttackAction += HandleAttackAction;
+
         }
 
 
@@ -47,16 +49,11 @@ namespace DuyBui.Weapons.Components
         
         }
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            evenHandler.OnAttackAction += HandleAttackAction;
+ 
 
-        }
-
-        protected override void OnDisable()
+        protected override void OnDestroy()
         {
-            base.OnDisable();
+            base.OnDestroy();
 
             evenHandler.OnAttackAction -= HandleAttackAction;
         }

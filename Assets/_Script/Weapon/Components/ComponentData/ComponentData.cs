@@ -11,6 +11,8 @@ namespace DuyBui.Weapons.Components
     {
         [SerializeField, HideInInspector] private string name;
 
+        public Type ComponentDependency { get; protected set; }
+
         public ComponentData()
         {
             SetComponentName();

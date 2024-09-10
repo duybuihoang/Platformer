@@ -15,6 +15,11 @@ namespace DuyBui.Weapons.Components
 
         protected bool isAttackActive;
 
+        public virtual void Init()
+        {
+
+        }
+
         protected virtual void Awake()
         {
             weapon = GetComponent<Weapon>();
@@ -23,7 +28,8 @@ namespace DuyBui.Weapons.Components
 
         protected virtual void Start()
         {
-
+            weapon.onEnter += HandleEnter;
+            weapon.onExit += HandleExit;
         }
 
 
@@ -37,13 +43,12 @@ namespace DuyBui.Weapons.Components
             isAttackActive = false;
         }
 
-        protected virtual void OnEnable()
+/*        protected virtual void OnEnable()
         {
-            weapon.onEnter += HandleEnter;
-            weapon.onExit += HandleExit;
+            
 
-        }
-        protected virtual void OnDisable()
+        }*/
+        protected virtual void OnDestroy()
         {
             weapon.onEnter -= HandleEnter;
             weapon.onExit -= HandleExit;
@@ -65,9 +70,9 @@ namespace DuyBui.Weapons.Components
 
         }
 
-        protected override void Awake()
+        public override void Init()
         {
-            base.Awake();
+            base.Init();
 
             data = weapon.Data.getData<T1>();
         }

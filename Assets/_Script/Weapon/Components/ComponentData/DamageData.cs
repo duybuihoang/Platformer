@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace DuyBui.Weapons.Components
 {
-    public class DamageData : ComponentData<AttackDamage> 
+    public class DamageData : ComponentData<AttackDamage>
     {
-        
+        public DamageData()
+        {
+            ComponentDependency = typeof(Damage);
+        }
     }
 }

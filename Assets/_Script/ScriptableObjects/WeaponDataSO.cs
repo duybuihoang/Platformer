@@ -1,4 +1,5 @@
 using DuyBui.Weapons.Components;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,11 @@ namespace DuyBui.Weapons
         {
             return ComponentData.OfType<T>().FirstOrDefault();
         }
+
+        public List<Type> GetAllDependency()
+        {
+            return ComponentData.Select(component => component.ComponentDependency).ToList();
+        }    
         
         public void AddData(ComponentData data)
         {

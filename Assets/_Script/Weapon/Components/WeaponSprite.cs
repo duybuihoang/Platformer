@@ -43,32 +43,23 @@ namespace DuyBui.Weapons.Components
 
         }
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
 
-            baseSpriteRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
-            weaponSpriteRenderer = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
+            baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();
+            weaponSpriteRenderer = weapon.WeaponSpriteGameObject.GetComponent<SpriteRenderer>();
 
-
-            //TODO: FIX THIS WHEN CREATE WEAPON DATA
-            /*baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();
-            weaponSpriteRenderer = weapon.WeaponSpriteGameObject.GetComponent<SpriteRenderer>();*/
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
+            data = weapon.Data.getData<WeaponSpriteData>();
             baseSpriteRenderer.RegisterSpriteChangeCallback(HandleBaseSpriteChange);
-            weapon.onEnter += HandleEnter;
         }
-        protected override void OnDisable()
+
+       
+        protected override void OnDestroy()
         {
-            base.OnDisable();
+            base.OnDestroy();
 
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
-            weapon.onEnter -= HandleEnter;
         }
 
     }
